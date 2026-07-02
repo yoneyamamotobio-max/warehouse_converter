@@ -2,14 +2,14 @@
 setlocal
 cd /d "%~dp0"
 
-python -m pip install -r requirements.txt
+python -m pip install --disable-pip-version-check -r requirements.txt
 if errorlevel 1 exit /b %errorlevel%
 
 python -m PyInstaller ^
   --noconfirm ^
   --onefile ^
   --windowed ^
-  --name InventoryJsonViewer ^
+  --name InventoryExcelConverter ^
   --icon icon.ico ^
   --add-data "icon.ico;." ^
   --collect-all openpyxl ^

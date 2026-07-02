@@ -1,13 +1,13 @@
-# 倉庫 inventory-data JSON ビューア
+# 在庫データExcel変換ツール
 
-倉庫管理アプリから出力された `inventory-data-*.json` を読み込み、Excel風の表で閲覧、検索、並べ替え、列順変更、コピー、`.xlsx` 出力を行う別アプリです。既存の倉庫管理アプリ本体は変更しません。
+倉庫管理アプリから出力された `inventory-data-*.json` を読み込み、Excel形式（`.xlsx`）に変換して出力するアプリです。既存の倉庫管理アプリ本体は変更しません。
 
 ## セットアップ
 
 最初に依存ライブラリをインストールしてください。
 
 ```powershell
-pip install -r requirements.txt
+pip install --disable-pip-version-check -r requirements.txt
 ```
 
 `requirements.txt` には以下を含めています。
@@ -37,16 +37,14 @@ python inventory_json_viewer.py "C:\Users\yone\Downloads\inventory-data-2026-06-
 ## 主な機能
 
 - `.json` ファイルのドラッグ&ドロップ読み込み
-- 「ファイルを選択」ボタンからの読み込み
-- 在庫明細、在庫集計、パレット一覧、出庫履歴、マップメモのタブ表示
-- 検索対象列を選んだ部分一致検索、全列検索
-- ヘッダークリックで並べ替え
-- 列幅変更、列ヘッダーのドラッグによる列順変更
-- 列幅と列順の保存
-- セル編集不可
-- Ctrl+C、右クリック「コピー」「ヘッダー付きコピー」
-- 検索結果のみ、または全件を `.xlsx` 出力
-- xlsx側でヘッダー固定、オートフィルター、列幅調整
+- 「JSONを選択」ボタンからの読み込み
+- 在庫明細、在庫集計、パレット一覧、出庫履歴、マップメモをExcelシートとして出力
+- 読み込んだ順番のままExcelへ出力
+- 見出し行付き `.xlsx` 出力
+- xlsx側でヘッダー固定、オートフィルター、列幅自動調整
+- パレット番号は文字列、枚数や在庫日数は数値として出力
+- 起動画面に位置確認用の真上ビューグリッドを表示
+- グリッドは見取り図のみで、実際のパレットやアイテム情報は表示しません
 
 ## EXE 化
 
@@ -60,13 +58,13 @@ build.bat
 
 ```powershell
 pip install -r requirements.txt
-python -m PyInstaller --noconfirm --onefile --windowed --name InventoryJsonViewer --icon icon.ico --add-data "icon.ico;." --collect-all openpyxl inventory_json_viewer.py
+python -m PyInstaller --noconfirm --onefile --windowed --name InventoryExcelConverter --icon icon.ico --add-data "icon.ico;." --collect-all openpyxl inventory_json_viewer.py
 ```
 
 生成物:
 
 ```text
-dist\InventoryJsonViewer.exe
+dist\InventoryExcelConverter.exe
 ```
 
 `openpyxl` はEXE内に同梱されるため、EXE利用者が別途 `pip install openpyxl` を実行する必要はありません。
