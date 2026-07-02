@@ -5,7 +5,7 @@ a = Analysis(
     ['inventory_json_viewer.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('icon.ico', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
